@@ -4,10 +4,48 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../src/style.css">
   <script defer src="main.js"></script>
   <title>Todo List</title>
 </head>
 <body>
-  
+  <div class="contents">
+    <div class="projects">
+      <ol class="projects_ol">
+      
+      </ol>
+      <div class="np_container"><button class="new_project">New Project</button></div>
+    </div>
+    <div class="lists">
+      <ol class="lists_ol">
+
+      </ol>
+    </div>
+    <div class="details">
+      <ul class="details_ul">
+        <li class="description"></li>
+        <li class="dueDate"></li>
+        <li class="div_delete"></li>
+      </ul>
+    </div>
+  </div>
+  <div class="new_todos">
+    <h3>New Todo:</h3>
+    <form id="form">
+      <div><input type="text" name="title" placeholder="Title" required></div>
+      <div><input type="text" name="description" placeholder="Description"></div>
+      <div>
+        <input type="date" id="dueDate" name="dueDate" required>
+        <!-- <label for="dueDate">Due Date</label> -->
+      </div>
+      <div>
+        <select id="p_id" name="p_id">
+        </select>        
+      </div>
+      <div>
+        <button class="new_todo" type="submit">Add Todo</button>
+      </div>
+    </form>
+  </div>
 </body>
 </html>

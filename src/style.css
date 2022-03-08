@@ -1,0 +1,53 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: lightgray;
+  gap: 2px;
+  margin: 0;
+}
+
+.contents {
+  display: flex;
+  flex: 2.3;
+  gap: 2px;
+  background-color: lightgray;
+
+}
+.new_todos {
+  flex: 1;
+  display: inline-block;
+  padding: 2%;
+}
+div {
+  background-color: white;
+  border-radius: 10px;
+}
+
+.projects {
+  flex: 1;
+}
+
+.lists {
+  flex: 1;
+}
+
+.details {
+  flex: 2;
+}
+
+#form > div {
+  margin-bottom: 1%;
+}
+
+.details_ul {
+  list-style-type: none;
+}
+
+.details_ul > li {
+  margin-bottom: 10px;
+}
+
+.np_container {
+  text-align: center;
+}
