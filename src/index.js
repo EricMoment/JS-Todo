@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 class Todos {
   constructor(title, description, dueDate, p_id) {
     this.title = title;
@@ -19,18 +20,20 @@ class Projects {
 };
 
 const example = new Projects('Example');
-const examle = new Todos('Review Genki', 'Review Genki to handle speaking test', '2022-03-10', 1)
-let project_list = [example];
-let todo_list = [examle];
+const examle = new Todos('Example', 'Example', '03-10-2022', 1)
+let project_list = JSON.parse(localStorage.getItem('project')) || [new Projects('Example')];
+let todo_list = JSON.parse(localStorage.getItem('todo')) || [new Todos('Review Genki', 'Review Genki to handle speaking test', '2022-03-10', 1)];
 
 function add_project_to_list(title) {
   const newpro = new Projects(title);
   project_list.push(newpro);
+  localStorage.setItem('project', JSON.stringify(project_list));
 };
 
 function add_todo_to_list(title, description, dueDate, p_id) {
   const newtodo = new Todos(title, description, dueDate, p_id);
   todo_list.push(newtodo);
+  localStorage.setItem('todo', JSON.stringify(todo_list));
 }
 
 function show_projects() {
@@ -79,7 +82,11 @@ new_todo.addEventListener('click', (e) => {
   param.p_id = Number(param.p_id);
   if (param.title === '' || param.dueDate === '' || param.p_id === '') return;
   //console.log(param);
+  param.dueDate = format(new Date(param.dueDate), 'MM-dd-yyyy')
   add_todo_to_list(param.title, param.description, param.dueDate, param.p_id)
+  let filtered_list = todo_list.filter(todo => todo.p_id === param.p_id); 
+  show_todos(filtered_list)
+  click_todo(filtered_list)
   click_project()
 });
 
@@ -117,6 +124,8 @@ function click_todo(list) {
   const dueDate = document.querySelector('.dueDate');
   description.textContent = '';
   dueDate.textContent = '';
+  const div_delete = document.querySelector('.div_delete');
+  div_delete.textContent = '';
   const todos_li = document.querySelectorAll('.t_li');
   todos_li.forEach(todo => {
     todo.addEventListener('click', () => {
@@ -135,7 +144,6 @@ function click_todo(list) {
     });
   });
 };
-
 function delete_todo(id) {
   const delete_btn = document.querySelector('.b_delete');
   delete_btn.addEventListener('click', () => {
@@ -149,6 +157,7 @@ function delete_todo(id) {
     let filtered_list = todo_list.filter(todo => todo.p_id === id);
     let result = (filtered_list.splice(index, 1)).at(0);
     todo_list.splice(todo_list.indexOf(result), 1);
+    localStorage.setItem('todo', JSON.stringify(todo_list));
     show_todos(filtered_list);
     click_todo(filtered_list);
     //console.log(todo_list)
